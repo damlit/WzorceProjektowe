@@ -9,5 +9,7 @@ public class Main {
         factory.abstractt.Main.main();
         singleton.Main.main();
         command.Main.main();
+        adapter.Main.main();
+        facade.Main.main();
     }
 }
