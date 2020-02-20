@@ -21,12 +21,12 @@ public class CompositeTest {
         allMenu.add(firstMenu);
         firstMenu.add(secondMenu);
 
-        Optional<MenuComponent> menu = allMenu.getDescendant("first");
-        Assert.assertTrue(menu.isPresent());
-        menu = menu.get().getDescendant("second");
-        Assert.assertTrue(menu.isPresent());
-        Optional<MenuComponent> item = menu.get().getDescendant("item");
-        Assert.assertTrue(item.isPresent());
-        Assert.assertEquals(21, item.get().getPrice());
+        Optional<Integer> price = allMenu.getDescendant("first")
+                .flatMap(second -> second.getDescendant("second"))
+                .flatMap(third -> third.getDescendant("item"))
+                .map(MenuComponent::getPrice);
+
+        Assert.assertTrue(price.isPresent());
+        Assert.assertEquals(Integer.valueOf(21), price.get());
     }
 }

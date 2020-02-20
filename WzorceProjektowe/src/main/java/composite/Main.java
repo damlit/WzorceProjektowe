@@ -1,6 +1,7 @@
 package composite;
 
 import composite.entity.Menu;
+import composite.entity.MenuComponent;
 import composite.entity.MenuItem;
 
 public class Main {
@@ -21,12 +22,11 @@ public class Main {
 
         secondMenu.add(thirdMenu);
 
-        System.out.println( "Carrot price -> " +
-                allMenu.getDescendant("second").get()
-                        .getDescendant("third").get()
-                        .getDescendant("Carrot").get()
-                        .getPrice()
-        );
+        allMenu.getDescendant("second")
+                .flatMap(second -> second.getDescendant("third"))
+                .flatMap(third -> third.getDescendant("Carrot"))
+                .ifPresent(carrot -> System.out.println("Carrot price -> " + carrot.getPrice()));
+
         System.out.println();
     }
 }
