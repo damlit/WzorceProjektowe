@@ -11,5 +11,8 @@ public class Main {
         command.Main.main();
         adapter.Main.main();
         facade.Main.main();
+        template_method.Main.main();
+        iterator.Main.main();
+        composite.Main.main();
     }
 }
